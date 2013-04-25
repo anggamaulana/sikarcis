@@ -1,6 +1,7 @@
+<h3>Pengadaan Gudang atau Pencetakan Bulan <?php echo $this->karcis->bulan_id(date('n'));?> Tahun <?php echo date('Y');?></h3>
+<br>
 <div style="float:left">
-<form action="<?php echo site_url('main/simpanpengadaan') ;?>" name="pengadaan_karcis" method="POST" >
-<p class="style1"><h3>PENGADAAN BARANG / KARCIS PORPORASI</h3> </p>
+    <form action="" name="pengadaan_gudang" method="POST" >
 <table width="200" border="1" bordercolor="#000000">
   <tr>
     <td width="50"><div align="center"><strong>Jenis Karcis </strong></div></td>
@@ -57,49 +58,23 @@
 
   </tr>
 </table>
-<p>&nbsp;</p>
-<p><strong>Pengadaan Porporasi Untuk Bulan</strong> 
-  <select name="bulan" size="1" id="bulan_laporan">
-   
-      <?php
-      $bulanini=date('n');
-      $bulannext=$bulanini+1;
-      
-      if($bulanini==12)
-          $bulannext=1;
-      
-      echo ' <option value="'.$bulanini.'" selected="selected">'.$this->karcis->bulan_id($bulanini).'</option>';
-      
-      ?>
-<!--      <option value="1" selected="selected">JANUARI</option>
-    <option value="2">FEBRUARI</option>
-    <option value="3">MARET</option>
-    <option value="4">APRIL</option>
-    <option value="5">MEI</option>
-    <option value="6">JUNI</option>
-    <option value="7">JULI</option>
-    <option value="8">AGUSTUS</option>
-    <option value="9">SEPTEMBER</option>
-    <option value="10">OKTOBER</option>
-    <option value="11">NOVEMBER</option>
-    <option value="12">DESEMBER</option>-->
-    
-  </select>
-     <?php echo date('Y'); ?>
-</p>
-<p><strong>NAMA OPERATOR :</strong> 
+        <br><br>
+        <label style="color:red;">
+        <input type="checkbox" name="stoklama" value="1" />
+Hapus Stok Lama (Stok Porporasi dan Stok Gudang akan dihapus)</label>
+            
+    <br><br>
+    <p><strong>NAMA PENYETOR :</strong> 
   <input name="nama_operator" type="text" id="nama_operator" />
 </p>
 <p>
-  <input type="submit" name="Submit" value="Submit" />
-</p>
-</form>
-    
-</div>
+          <input type="submit" name="submit" value="Submit" />
+    </form>
+    </div>
 <div style="float:left;margin-left:20px">
-    <br><br>
+    
 <?php echo validation_errors();
-if(isset($pengadaanada))echo $pengadaanada;
+
 ?>
 </div>
 

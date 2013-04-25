@@ -44,6 +44,30 @@ class Pengeluaran_model extends CI_Model{
        }
    }
    
+   public function cekLaporanGudangBulanIni(){
+       $bulan = date('n');
+       $tahun = date('Y');
+       
+       $q=$this->db->query("select id from laporan_sirkulasi_gudang where bulan=? and tahun=?",array($bulan,$tahun));
+       if($q->num_rows()>0){
+           return true;
+       }else{
+           return false;
+       }
+   }
+   
+    public function tambahLaporanGudangBulanIni(){
+       $ambilstoksekarang=$this->db->query("select id_karcis,stok_kw1_gudang,stok_kw2_gudang from jenis_karcis where id_karcis in(1,2,3,4,5,6,7,8) order by id_karcis asc");
+       $hasil=$ambilstoksekarang->result();
+       $bulan = date('n');
+       $tahun = date('Y');
+       
+       foreach($hasil as $hs){
+           $this->db->query("insert into laporan_sirkulasi_gudang(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?)",
+                   array($bulan,$tahun,$hs->id_karcis,$hs->stok_kw1_gudang,$hs->stok_kw2_gudang));
+       }
+   }
+   
    public function tambahLaporanBulanIni(){
        $ambilstoksekarang=$this->db->query("select id_karcis,stok_kw1,stok_kw2 from jenis_karcis where id_karcis in(1,2,3,4,5,6,7,8) order by id_karcis asc");
        $hasil=$ambilstoksekarang->result();

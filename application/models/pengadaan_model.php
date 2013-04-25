@@ -38,37 +38,37 @@ class Pengadaan_model extends CI_Model{
         $id_stok=$this->db->insert_id();
         
         //insert tabel stok karcis sub
-        $total=($data['bus_besar_kw1']+$data['bus_besar_kw2'])*$data['bus_besar_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,1,$data['bus_besar_kw1'],$data['bus_besar_kw2'],$data['bus_besar_bundel'],$total));
+        //$total=($data['bus_besar_kw1']+$data['bus_besar_kw2'])*$data['bus_besar_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,1,$data['bus_besar_kw1'],$data['bus_besar_kw2']));
         
-        $total=($data['bus_sedang_kw1']+$data['bus_sedang_kw2'])*$data['bus_sedang_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,2,$data['bus_sedang_kw1'],$data['bus_sedang_kw2'],$data['bus_sedang_bundel'],$total));
+        //$total=($data['bus_sedang_kw1']+$data['bus_sedang_kw2'])*$data['bus_sedang_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,2,$data['bus_sedang_kw1'],$data['bus_sedang_kw2']));
         
-        $total=($data['truk_besar_kw1']+$data['truk_besar_kw2'])*$data['truk_besar_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,3,$data['truk_besar_kw1'],$data['truk_besar_kw2'],$data['truk_besar_bundel'],$total));
+        //$total=($data['truk_besar_kw1']+$data['truk_besar_kw2'])*$data['truk_besar_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,3,$data['truk_besar_kw1'],$data['truk_besar_kw2']));
         
-        $total=($data['truk_sedang_kw1']+$data['truk_sedang_kw2'])*$data['truk_sedang_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,4,$data['truk_sedang_kw1'],$data['truk_sedang_kw2'],$data['truk_sedang_bundel'],$total));
+       // $total=($data['truk_sedang_kw1']+$data['truk_sedang_kw2'])*$data['truk_sedang_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,4,$data['truk_sedang_kw1'],$data['truk_sedang_kw2']));
         
-        $total=($data['truk_gandeng_kw1']+$data['truk_gandeng_kw2'])*$data['truk_gandeng_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,5,$data['truk_gandeng_kw1'],$data['truk_gandeng_kw2'],$data['truk_gandeng_bundel'],$total));
+        //$total=($data['truk_gandeng_kw1']+$data['truk_gandeng_kw2'])*$data['truk_gandeng_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,5,$data['truk_gandeng_kw1'],$data['truk_gandeng_kw2']));
         
-        $total=($data['sepeda_motor_kw1']+$data['sepeda_motor_kw2'])*$data['sepeda_motor_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,6,$data['sepeda_motor_kw1'],$data['sepeda_motor_kw2'],$data['sepeda_motor_bundel'],$total));
+        //$total=($data['sepeda_motor_kw1']+$data['sepeda_motor_kw2'])*$data['sepeda_motor_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,6,$data['sepeda_motor_kw1'],$data['sepeda_motor_kw2']));
         
-        $total=($data['mobil_kw1']+$data['mobil_kw2'])*$data['mobil_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,7,$data['mobil_kw1'],$data['mobil_kw2'],$data['mobil_bundel'],$total));
+        //$total=($data['mobil_kw1']+$data['mobil_kw2'])*$data['mobil_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,7,$data['mobil_kw1'],$data['mobil_kw2']));
         
-        $total=($data['sepeda_kw1']+$data['sepeda_kw2'])*$data['sepeda_bundel'];
-        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel,total_harga) values(?,?,?,?,?,?) ",
-                array($id_stok,8,$data['sepeda_kw1'],$data['sepeda_kw2'],$data['sepeda_bundel'],$total));
+        //$total=($data['sepeda_kw1']+$data['sepeda_kw2'])*$data['sepeda_bundel'];
+        $this->db->query("insert into stok_sub_karcis(id_stok,id_karcis,total_kw1,total_kw2) values(?,?,?,?) ",
+                array($id_stok,8,$data['sepeda_kw1'],$data['sepeda_kw2']));
         
         
 //        if($this->db->trans_status()===FALSE){
@@ -135,7 +135,9 @@ class Pengadaan_model extends CI_Model{
                 array($data['bulan'],$tahun,$i+1,$stokkarcis[$i][0],$stokkarcis[$i][1]));
             }
             
-            $this->db->query("update jenis_karcis set stok_kw1=?,stok_kw2=? where id_karcis=?",array($stokkarcis[$i][0],$stokkarcis[$i][1],$i+1));
+            //update stok porporasi dan gudang
+            $this->db->query("update jenis_karcis set stok_kw1=?,stok_kw2=?,stok_kw1_gudang=stok_kw1_gudang-?,stok_kw2_gudang=stok_kw2_gudang-? where id_karcis=?",
+                    array($stokkarcis[$i][0],$stokkarcis[$i][1],$data_karcis[0][0],$data_karcis[0][1],$i+1));
         }
         
         
@@ -194,6 +196,20 @@ class Pengadaan_model extends CI_Model{
          
      }
      
+     public function PengadaanGudangIDStok($id){
+         $q=$this->db->query("select id_stok_gudang,nama_penyetor,bulan,tahun,waktu from stok_gudang where id_stok_gudang=?",
+                 array($id));
+         
+         if($q->num_rows>0){
+             $h=$q->row();
+             
+             return array($h->id_stok_gudang,$h->nama_penyetor,$h->bulan,$h->tahun,$h->waktu);
+         }else{
+             return array('','Tidak ada');
+         }
+         
+     }
+     
      public function batalkanPengadaan($id){
          $bulan=$this->PengadaanIDStok($id);
          
@@ -231,5 +247,28 @@ class Pengadaan_model extends CI_Model{
          }else{
              return false;
          }
+     }
+     
+     
+     public function cekStokKW1DiGUdang($idkarcis,$stok){
+         $q=$this->db->query("select id_karcis from jenis_karcis where id_karcis=? and stok_kw1_gudang>=?",
+                 array($idkarcis,$stok));
+         if($q->num_rows()>0){
+             return true;
+         }else{
+             return false;
+         }
+         
+     }
+     
+     public function cekStokKW2DiGUdang($idkarcis,$stok){
+         $q=$this->db->query("select id_karcis from jenis_karcis where id_karcis=? and stok_kw2_gudang>=?",
+                 array($idkarcis,$stok));
+         if($q->num_rows()>0){
+             return true;
+         }else{
+             return false;
+         }
+         
      }
 }

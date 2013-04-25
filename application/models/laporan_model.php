@@ -15,31 +15,7 @@ class Laporan_model extends CI_Model {
 
     public function ambilDataLaporan($tipe_laporan, $bulan, $tahun) {
         if ($tipe_laporan == 1) {
-            if ($bulan == 13) {
-
-                return $this->ambilSirkulasiTahun($tahun);
-            } else {
-                if($dt=$this->ambilSirkulasidiBulan($bulan, $tahun)){
-                    $datahsl = array();
-                    array_push($datahsl, array($dt, $bulan, $tahun));
-                    return $datahsl;
-                }else{
-                    return false;
-                }
-            }
-        } else if ($tipe_laporan == 2) {
-            if ($bulan == 13) {
-
-                return $this->ambilPengadaanTahun($tahun);
-            } else {
-                if($dt=$this->ambilPengadaanBulan($bulan, $tahun)){
-                    $datahsl = array();
-                    array_push($datahsl, array($dt, $bulan, $tahun));
-                    return $datahsl;
-                }else{
-                    return false;
-                }
-            }
+            return $this->ambilSirkulasiGudangTahun($tahun);
         }else if($tipe_laporan == 3){
             if($bulan==13){
                 if($dt=$this->ambilSirkulasidanPengadaanTahun($tahun)){                    
@@ -94,15 +70,15 @@ class Laporan_model extends CI_Model {
     }
     
     public function ambilPengadaanBulan($bulan,$tahun){
-        $q = $this->db->query("select a.id_karcis,a.total_kw1,a.total_kw2,harga_cetak_per_bundel 
-            from stok_sub_karcis a,stok_karcis b where a.id_stok=b.id_stok and b.bulan=? and b.tahun=? order by a.id_karcis asc",
+        $q = $this->db->query("select a.id_karcis,sum(a.total_kw1)as total_kw1,sum(a.total_kw2) as total_kw2
+            from stok_sub_karcis a,stok_karcis b where a.id_stok=b.id_stok and b.bulan=? and b.tahun=? group by a.id_karcis order by a.id_karcis asc",
                 array($bulan,$tahun));
         $hasil = $q->result();
         
         if ($q->num_rows() > 0) {
             $data=array();
             foreach($hasil as $hs){
-                array_push($data, array($hs->total_kw1,$hs->total_kw2,$hs->harga_cetak_per_bundel));
+                array_push($data, array($hs->total_kw1,$hs->total_kw2));
             }
          return $data;
          } else {
@@ -117,7 +93,7 @@ class Laporan_model extends CI_Model {
     
     
     public function ambilPengadaanTahun($tahun){
-        $q=$this->db->query("select id_stok,bulan from stok_karcis where tahun=?",array($tahun));
+        $q=$this->db->query("select distinct bulan from stok_karcis where tahun=?",array($tahun));
         $hasil=$q->result();
         
         
@@ -168,7 +144,7 @@ class Laporan_model extends CI_Model {
     
     
     public function ambilPengadaanIDstok($id){
-        $q = $this->db->query("select id_karcis,total_kw1,total_kw2,harga_cetak_per_bundel 
+        $q = $this->db->query("select id_karcis,total_kw1,total_kw2
             from stok_sub_karcis where id_stok=? order by id_karcis asc",
                 array($id));
         $hasil = $q->result();
@@ -176,7 +152,7 @@ class Laporan_model extends CI_Model {
         if ($q->num_rows() > 0) {
             $data=array();
             foreach($hasil as $hs){
-                array_push($data, array($hs->total_kw1,$hs->total_kw2,$hs->harga_cetak_per_bundel));
+                array_push($data, array($hs->total_kw1,$hs->total_kw2));
                 
             }
          return $data;
@@ -184,6 +160,123 @@ class Laporan_model extends CI_Model {
             return false;
         }
         
+    }
+    
+    public function ambilPengadaanGudangIDstok($id){
+        $q = $this->db->query("select id_karcis,total_kw1,total_kw2
+            from stok_gudang_sub where id_stok_gudang=? order by id_karcis asc",
+                array($id));
+        $hasil = $q->result();
+        
+        if ($q->num_rows() > 0) {
+            $data=array();
+            foreach($hasil as $hs){
+                array_push($data, array($hs->total_kw1,$hs->total_kw2));
+                
+            }
+         return $data;
+         } else {
+            return false;
+        }
+        
+    }
+    
+    
+    
+    public function ambilSirkulasiGudangMobilMotorBulan($bulan,$tahun){
+       
+        $data=array();
+        
+        $stok_awal=array();
+        $cetak=array();
+        $jumlah=array();
+        $porporasi=array();
+       
+        
+        //stok awal
+        $s=$this->db->query("select stok_kw1_awal,stok_kw2_awal from laporan_sirkulasi_gudang where bulan=? and tahun=? and id_karcis in (6,7) order by id_karcis asc",
+                array($bulan,$tahun));
+        if($s->num_rows>0){
+            $h=$s->result();
+            foreach($h as $hs){
+                array_push($data,$hs->stok_kw1_awal);
+                array_push($stok_awal,$hs->stok_kw1_awal);
+            }
+            foreach($h as $hs){
+                array_push($data,$hs->stok_kw2_awal);
+                 array_push($stok_awal,$hs->stok_kw2_awal);
+            }
+        }else{
+            for($i=0;$i<4;$i++){
+                array_push($data,'-');
+                 array_push($stok_awal,0);
+            }
+        }
+        
+        //cetak
+        $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_gudang s,stok_gudang_sub st where s.id_stok_gudang=st.id_stok_gudang and s.bulan=? and s.tahun=? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
+                array($bulan,$tahun));
+        $h=$s->result();
+        if($s->num_rows>0){
+            $h=$s->result();
+            foreach($h as $hs){
+                array_push($data,$hs->total_kw1);
+                 array_push($cetak,$hs->total_kw1);
+            }
+            foreach($h as $hs){
+                array_push($data,$hs->total_kw2);
+                array_push($cetak,$hs->total_kw2);
+            }
+        }else{
+            for($i=0;$i<4;$i++){
+                array_push($data,'-');
+             array_push($cetak,0);
+            }
+        }
+        
+        //jumlah
+        for($i=0;$i<4;$i++){
+            array_push($jumlah,$stok_awal[$i]+$cetak[$i]);
+            array_push($data,$stok_awal[$i]+$cetak[$i]);
+        }
+        
+        //porporasi
+         $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_karcis s,stok_sub_karcis st where s.id_stok=st.id_stok and s.bulan=? and s.tahun=? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
+                array($bulan,$tahun));
+        $h=$s->result();
+        if($s->num_rows>0){
+            $h=$s->result();
+            foreach($h as $hs){
+                array_push($data,$hs->total_kw1);
+                 array_push($porporasi,$hs->total_kw1);
+            }
+            foreach($h as $hs){
+                array_push($data,$hs->total_kw2);
+                array_push($porporasi,$hs->total_kw2);
+            }
+        }else{
+            for($i=0;$i<4;$i++){
+                array_push($data,'-');
+             array_push($porporasi,0);
+            }
+        }
+        
+        //sisa
+        for($i=0;$i<4;$i++){           
+            array_push($data,$jumlah[$i]-$porporasi[$i]);
+        }
+        
+        return $data;
+        
+        
+    }
+    
+    public function ambilSirkulasiGudangTahun($tahun){
+        $data=array();
+        for($i=1;$i<=12;$i++){
+           array_push($data, $this->ambilSirkulasiGudangMobilMotorBulan($i,$tahun));
+        }
+        return $data;
     }
 
 }

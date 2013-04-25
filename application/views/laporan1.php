@@ -1,6 +1,6 @@
 
                 <br>
-                <h3>Laporan Keluar Masuk Karcis Bulan <?php echo $this->karcis->bulan_id($laporan[$i][1]) . ' ' . $laporan[$i][2]; ?></h3>
+                <h3>Laporan Keluar Masuk Karcis Porporasi Bulan <?php echo $this->karcis->bulan_id($laporan[$i][1]) . ' ' . $laporan[$i][2]; ?></h3>
                 <table width="756" border="1" bordercolor="#000000" bgcolor="#FFFFFF" style="color:#000">
                     <tr>
                         <td width="24" rowspan="2"><div align="center"><strong>NO</strong></div></td>

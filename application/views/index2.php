@@ -41,12 +41,19 @@ foreach($css_files as $file): ?>
 				
                                 
                             <li <?php if($menu==0) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main');?>">Home</a></li>
-				<li <?php if($menu==1) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengadaankarcis');?>">Pengadaan Karcis</a></li>
+				<li <?php if($menu==1) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengadaankarcis');?>">Pengadaan Porporasi</a></li>
 				<li <?php if($menu==2) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengeluarankarcis');?>">Pengeluaran Karcis</a></li>
 				
 				<li <?php if($menu==4) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/jeniskarcis');?>">Stok Karcis</a></li>
-				<li><a href="<?php echo site_url('main/laporan');?>">Laporan</a></li>
-				
+				<li <?php if($menu==6) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengadaangudang');?>">Pengadaan Gudang</a></li>
+                                <li><a href="<?php echo site_url('main/laporan');?>">Laporan</a></li>
+				 <?php
+                                if($this->session->userdata('islogin')==true){
+                                ?>
+                                <li><a href="<?php echo site_url('main/logout');?>">Logout</a></li>
+                                <?php
+                                }
+                                ?>
 			</ul>
 		</div>
 	</div>
@@ -59,14 +66,13 @@ foreach($css_files as $file): ?>
                     
                      
                     
-                    <p class="style1"><h3>Pengadaan Karcis 
+                    <p class="style1"><h3>Pengadaan Karcis Porporasi
                      
                         Tahun : <?php echo date('Y'); ?></h3>
                     </p>
-                    <p>Pengadaan Karcis Di Bulan Ini (<?php echo $this->karcis->bulan_id(date('n')); ?>) oleh : <a href="<?php echo site_url('main/lihatpengadaan/'.$pengadaanbulanini[0]);?>"><?php echo $pengadaanbulanini[1];?></a>
+                       
                         
-                        
-                    </p>
+                 
                     <a href="<?php echo site_url('main/pengadaankarcis_add') ?>">+Tambah Pengadaan Karcis</a><br>
                         
                        
@@ -87,6 +93,14 @@ foreach($css_files as $file): ?>
                   
                     <p class="style1"><h3>Stok Karcis</h3>
                     </p>
+                    
+                    <?php
+                }else if($menu==6 && strcmp($this->uri->segment(3),"add")!=0){
+                    ?>
+                  
+                    <p class="style1"><h3>Pengadaan Stok Karcis di Gudang atau Pencetakan <?php echo date('Y'); ?></h3>
+                    </p>
+                         <a href="<?php echo site_url('main/pengadaangudang_add') ?>">+Tambah Pengadaan Gudang</a><br>
                     
                     <?php
                 }
