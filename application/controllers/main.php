@@ -76,6 +76,8 @@ class Main extends CI_Controller {
             $crud->add_action('LihatDetail', '', site_url('main/lihatpengadaangudang\/'), 'ui-icon-plus');
             $crud->set_language('indonesian');
             $crud->where('tahun', date('Y'));
+            $crud->columns('waktu','nama_penyetor','bulan','tahun','sss');
+           
 
             $output = $crud->render();
             $output->menu = 6;
@@ -248,6 +250,7 @@ class Main extends CI_Controller {
                 $this->form_validation->set_rules('sepeda_kw1', 'Sepeda KW1', 'required|numeric');
                 $this->form_validation->set_rules('sepeda_kw2', 'Sepeda KW2', 'required|numeric');
                 $this->form_validation->set_rules('nama_operator', 'Nama Penyetor', 'required');
+               
 
                 if ($this->form_validation->run()) {
                     $this->load->model("pengadaan_gudang_model");
@@ -261,9 +264,13 @@ class Main extends CI_Controller {
                         $this->pengeluaran_model->tambahLaporanGudangBulanIni();
                     }
                     //
-
-                    $this->pengadaan_gudang_model->simpanPengadaan($data);
-                    redirect(site_url('main/pengadaangudang' . $data['stok_lama']));
+                    if($data['stok_lama']==1){
+                         $this->pengadaan_gudang_model->simpanPengadaanHapusStokLama($data);
+                   
+                    }else{
+                        $this->pengadaan_gudang_model->simpanPengadaan($data);
+                    }
+                    redirect(site_url('main/pengadaangudang'));
                 }
             }
             $this->load->view('index', $dt);
@@ -536,8 +543,8 @@ class Main extends CI_Controller {
         $data['mobil_kw2'] = $this->input->post('mobil_kw2', true);
 
 
-        $data['sepeda_kw1'] = $this->input->post('sepeda_kw1');
-        $data['sepeda_kw2'] = $this->input->post('sepeda_kw2');
+        $data['sepeda_kw1'] = $this->input->post('sepeda_kw1',true);
+        $data['sepeda_kw2'] = $this->input->post('sepeda_kw2',true);
 
 
         $data['nama_operator'] = $this->input->post('nama_operator');

@@ -1,4 +1,4 @@
-<h3>Laporan Sirkulasi Gudang Tahun <?php echo $this->input->post('tahun',true); ?></h3>
+<h3>Laporan Sirkulasi Gudang Tahun <?php echo $this->input->post('tahun',true); ?> Untuk Mobil Dan Motor</h3>
 <table width="1000" border="1" style="color:#000">
   <tr>
     <td rowspan="2" bordercolor="#666666" bgcolor="#FFFFFF"><div align="center">No</div></td>
@@ -360,7 +360,7 @@
     ?>
     <?php
         for($i=4;$i<=7;$i++){
-            echo'<td bordercolor="#CC6633" bgcolor="#FFF">'.$laporan[1][$i].'&nbsp;</td>';
+            echo'<td bordercolor="#CC6633" bgcolor="#FFF">'.$laporan[11][$i].'&nbsp;</td>';
         }
     ?>
    <?php

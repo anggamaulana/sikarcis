@@ -137,7 +137,7 @@ class Pengadaan_model extends CI_Model{
             
             //update stok porporasi dan gudang
             $this->db->query("update jenis_karcis set stok_kw1=?,stok_kw2=?,stok_kw1_gudang=stok_kw1_gudang-?,stok_kw2_gudang=stok_kw2_gudang-? where id_karcis=?",
-                    array($stokkarcis[$i][0],$stokkarcis[$i][1],$data_karcis[0][0],$data_karcis[0][1],$i+1));
+                    array($stokkarcis[$i][0],$stokkarcis[$i][1],$data_karcis[$i][0],$data_karcis[$i][1],$i+1));
         }
         
         

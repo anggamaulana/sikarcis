@@ -9,7 +9,7 @@
         Bulan : 
         <select name="bulan_laporan" size="1" id="bulan_laporan">
             <option value="13" selected="selected">Semua Bulan</option>
-            <option value="1" >JANUARI</option>
+<!--            <option value="1" >JANUARI</option>
             <option value="2">FEBRUARI</option>
             <option value="3">MARET</option>
             <option value="4">APRIL</option>
@@ -20,10 +20,10 @@
             <option value="9">SEPTEMBER</option>
             <option value="10">OKTOBER</option>
             <option value="11">NOVEMBER</option>
-            <option value="12">DESEMBER</option>
+            <option value="12">DESEMBER</option>-->
 
         </select>
-        Tahun : <input type="text" name="tahun" value="<?php echo set_value('tahun');?>">
+        di Tahun : <input type="text" name="tahun" value="<?php echo set_value('tahun');?>">
         <input type="submit" name="submit" value="Cari">
         <?php echo validation_errors(); ?>
     </p>

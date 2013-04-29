@@ -34,13 +34,15 @@ class Laporan_model extends CI_Model {
     }
 
     public function ambilSirkulasidiBulan($bulan, $tahun) {
-        $q = $this->db->query("select * from laporan_bulan where bulan=? and tahun=? order by id_karcis asc", array($bulan, $tahun));
+        $q = $this->db->query("select * from laporan_bulan where bulan=? and tahun=? order by id_karcis asc", 
+                array($bulan, $tahun));
         $h = $q->result();
 
         if ($q->num_rows() > 0) {
             $data = array();
             foreach ($h as $hs) {
-                $qr = $this->db->query("select ifnull(sum(bundel_kw1),0) as kw1,ifnull(sum(bundel_kw2),0) as kw2 from pengeluaran_karcis where id_karcis=? and MONTH(waktu)=? and YEAR(waktu)=?", array($hs->id_karcis, $bulan, $tahun));
+                $qr = $this->db->query("select ifnull(sum(bundel_kw1),0) as kw1,ifnull(sum(bundel_kw2),0) as kw2 from pengeluaran_karcis where id_karcis=? and MONTH(waktu)=? and YEAR(waktu)=? and waktu>?",
+                        array($hs->id_karcis, $bulan, $tahun,$this->waktuGantiGudang($bulan, $tahun)));
                 $hsl = $qr->row();
                 $sisa1 = $hs->stok_kw1_awal - $hsl->kw1;
                 $sisa2 = $hs->stok_kw2_awal - $hsl->kw2;
@@ -71,8 +73,8 @@ class Laporan_model extends CI_Model {
     
     public function ambilPengadaanBulan($bulan,$tahun){
         $q = $this->db->query("select a.id_karcis,sum(a.total_kw1)as total_kw1,sum(a.total_kw2) as total_kw2
-            from stok_sub_karcis a,stok_karcis b where a.id_stok=b.id_stok and b.bulan=? and b.tahun=? group by a.id_karcis order by a.id_karcis asc",
-                array($bulan,$tahun));
+            from stok_sub_karcis a,stok_karcis b where a.id_stok=b.id_stok and b.bulan=? and b.tahun=? and b.waktu>? group by a.id_karcis order by a.id_karcis asc",
+                array($bulan,$tahun,$this->waktuGantiGudang($bulan, $tahun)));
         $hasil = $q->result();
         
         if ($q->num_rows() > 0) {
@@ -214,8 +216,10 @@ class Laporan_model extends CI_Model {
         }
         
         //cetak
-        $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_gudang s,stok_gudang_sub st where s.id_stok_gudang=st.id_stok_gudang and s.bulan=? and s.tahun=? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
-                array($bulan,$tahun));
+        
+            $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_gudang s,stok_gudang_sub st where s.id_stok_gudang=st.id_stok_gudang and s.bulan=? and s.tahun=? and s.waktu>? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
+                array($bulan,$tahun,$this->waktuGantiGudang($bulan, $tahun)));
+        
         $h=$s->result();
         if($s->num_rows>0){
             $h=$s->result();
@@ -241,8 +245,8 @@ class Laporan_model extends CI_Model {
         }
         
         //porporasi
-         $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_karcis s,stok_sub_karcis st where s.id_stok=st.id_stok and s.bulan=? and s.tahun=? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
-                array($bulan,$tahun));
+         $s=$this->db->query("select s.bulan,st.id_karcis,sum(st.total_kw1) as total_kw1,sum(st.total_kw2) as total_kw2 from stok_karcis s,stok_sub_karcis st where s.id_stok=st.id_stok and s.bulan=? and s.tahun=? and s.waktu>? and st.id_karcis in (6,7) group by st.id_karcis order by st.id_karcis asc",
+                array($bulan,$tahun,$this->waktuGantiGudang($bulan, $tahun)));
         $h=$s->result();
         if($s->num_rows>0){
             $h=$s->result();
@@ -277,6 +281,19 @@ class Laporan_model extends CI_Model {
            array_push($data, $this->ambilSirkulasiGudangMobilMotorBulan($i,$tahun));
         }
         return $data;
+    }
+    
+    
+    
+    public function waktuGantiGudang($bulan,$tahun){
+        $q=$this->db->query("select waktu from stok_gudang where bulan=? and tahun=? and ganti_gudang=1",
+                array($bulan,$tahun));
+        if($q->num_rows()>0){
+            $h=$q->row();
+            return $h->waktu;
+        }else{
+            return "";
+        }
     }
 
 }

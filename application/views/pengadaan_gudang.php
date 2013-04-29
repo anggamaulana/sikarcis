@@ -61,7 +61,7 @@
         <br><br>
         <label style="color:red;">
         <input type="checkbox" name="stoklama" value="1" />
-Hapus Stok Lama (Stok Porporasi dan Stok Gudang akan dihapus)</label>
+Hapus Stok Lama (Stok Porporasi dan Stok Gudang lama akan dihapus)</label>
             
     <br><br>
     <p><strong>NAMA PENYETOR :</strong> 
