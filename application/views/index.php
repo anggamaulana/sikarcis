@@ -15,7 +15,7 @@ Released   : 20130406
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Vestibule  by FCT</title>
+<title>Sistem Informasi Pengelolaan Karcis</title>
 
 <link href="<?php echo base_url().'assets/';?>style.css" rel="stylesheet" type="text/css" media="screen" />
 
