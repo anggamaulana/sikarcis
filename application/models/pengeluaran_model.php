@@ -15,20 +15,20 @@ class Pengeluaran_model extends CI_Model{
     
     
    public function cekBatasStokKW1($st,$id){
-       $q=$this->db->query("select stok_kw1 from jenis_karcis where id_karcis=? and stok_kw1<?",array($id,$st));
+       $q=$this->db->query("select stok_kw1 from jenis_karcis where id_karcis=? and stok_kw1>=? ",array($id,$st));
        if($q->num_rows()>0){
-           return false;
-       }else{
            return true;
+       }else{
+           return false;
        }
    }
    
     public function cekBatasStokKW2($st,$id){
-       $q=$this->db->query("select stok_kw1 from jenis_karcis where id_karcis=? and stok_kw1<?",array($id,$st));
+       $q=$this->db->query("select stok_kw2 from jenis_karcis where id_karcis=? and stok_kw2>=? ",array($id,$st));
        if($q->num_rows()>0){
-           return false;
-       }else{
            return true;
+       }else{
+           return false;
        }
    }
    
