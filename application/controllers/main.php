@@ -317,6 +317,8 @@ class Main extends CI_Controller {
                 $crud->where('MONTH(waktu)', $this->input->post('bulan'));
                 $crud->where('MONTH(waktu)', date('Y'));
             }
+            
+            
             $crud->columns('id_karcis', 'nama_penyetor', 'kode', 'bundel_kw1', 'bundel_kw2', 'total');
             $crud->add_fields('id_karcis', 'nama_penyetor', 'kode', 'bundel_kw1', 'bundel_kw2', 'total');
             $crud->field_type('total', 'invisible');
@@ -502,7 +504,7 @@ class Main extends CI_Controller {
             } else {
                 $data['menu'] = 1;
                 $data['view'] = 'login';
-                $data['pesan'] = 'User atau password salah';
+                $data['pesan'] = 'User atau password salah, coba cek juga Tombol Capslock';
                 $this->load->view('index', $data);
             }
         }
@@ -576,7 +578,7 @@ class Main extends CI_Controller {
 
 
         $this->form_validation->set_rules('mobil_kw1', 'Mobil KW1', 'required|numeric|callback_cekgudang_kw1[7]');
-        $this->form_validation->set_rules('mobil_kw2', 'MObil KW2', 'required|numeric|callback_cekgudang_kw2[7]');
+        $this->form_validation->set_rules('mobil_kw2', 'Mobil KW2', 'required|numeric|callback_cekgudang_kw2[7]');
 
 
         $this->form_validation->set_rules('sepeda_kw1', 'Sepeda KW1', 'required|numeric|callback_cekgudang_kw1[8]');
