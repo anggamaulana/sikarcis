@@ -48,7 +48,7 @@
   <tr>
     <td>Mobil</td>
     <td><input name="mobil_kw1" type="text" id="mobil_kw1" size="20" value="<?php echo set_value('mobil_kw1');?>"/></td>
-    <td><input name="mobil_kw2" type="text" id="mobil_kw2" size="20" value="<?php echo set_value('mobil_kw1');?>"/></td>
+    <td><input name="mobil_kw2" type="text" id="mobil_kw2" size="20" value="<?php echo set_value('mobil_kw2');?>"/></td>
     
   </tr>
   <tr>

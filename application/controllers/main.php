@@ -555,6 +555,7 @@ class Main extends CI_Controller {
 
         $this->form_validation->set_rules('bus_besar_kw1', 'Bus Besar KW1', 'required|numeric|callback_cekgudang_kw1[1]');
         $this->form_validation->set_rules('bus_besar_kw2', 'Bus Besar KW2', 'required|numeric|callback_cekgudang_kw2[1]');
+        
 
 
         $this->form_validation->set_rules('bus_sedang_kw1', 'Bus sedang KW1', 'required|numeric|callback_cekgudang_kw1[2]');
