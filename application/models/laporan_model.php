@@ -34,7 +34,7 @@ class Laporan_model extends CI_Model {
     }
 
     public function ambilSirkulasidiBulan($bulan, $tahun) {
-        $q = $this->db->query("select * from laporan_bulan where bulan=? and tahun=? order by id_karcis asc", 
+        $q = $this->db->query("select * from transaksi_porporasi where bulan=? and tahun=? order by id_karcis asc", 
                 array($bulan, $tahun));
         $h = $q->result();
 
@@ -57,7 +57,7 @@ class Laporan_model extends CI_Model {
 
     public function ambilSirkulasiTahun($tahun) {
 
-        $q = $this->db->query("SELECT distinct bulan from laporan_bulan where tahun=2013 order by bulan asc");
+        $q = $this->db->query("SELECT distinct bulan from transaksi_porporasi where tahun=2013 order by bulan asc");
         $h = $q->result();
 
          if ($q->num_rows() > 0) {
@@ -112,7 +112,7 @@ class Laporan_model extends CI_Model {
     }
     
     public function ambilSirkulasidanPengadaanBulan($bulan,$tahun){
-        $q=$this->db->query("select id from laporan_bulan where bulan=? and tahun=?",array($bulan,$tahun));
+        $q=$this->db->query("select id from transaksi_porporasi where bulan=? and tahun=?",array($bulan,$tahun));
         
         if($q->num_rows()>0){
             $data=array();
@@ -126,7 +126,7 @@ class Laporan_model extends CI_Model {
     }
     
     public function ambilSirkulasidanPengadaanTahun($tahun){
-        $q=$this->db->query("select distinct bulan from laporan_bulan where tahun=?",array($tahun));
+        $q=$this->db->query("select distinct bulan from transaksi_porporasi where tahun=?",array($tahun));
         $hasil=$q->result();
         if($q->num_rows()>0){
             $data=array();
@@ -196,7 +196,7 @@ class Laporan_model extends CI_Model {
        
         
         //stok awal
-        $s=$this->db->query("select stok_kw1_awal,stok_kw2_awal from laporan_sirkulasi_gudang where bulan=? and tahun=? and id_karcis in (6,7) order by id_karcis asc",
+        $s=$this->db->query("select stok_kw1_awal,stok_kw2_awal from transaksi_sirkulasi_gudang where bulan=? and tahun=? and id_karcis in (6,7) order by id_karcis asc",
                 array($bulan,$tahun));
         if($s->num_rows>0){
             $h=$s->result();

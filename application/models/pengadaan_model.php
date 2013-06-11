@@ -126,12 +126,12 @@ class Pengadaan_model extends CI_Model{
             
             if($cek){
                 //updating data laporan bulan
-                $this->db->query("update laporan_bulan set stok_kw1_awal=stok_kw1_awal+?,stok_kw2_awal=stok_kw2_awal+? where id_karcis=? and bulan=? and tahun=?",
+                $this->db->query("update transaksi_porporasi set stok_kw1_awal=stok_kw1_awal+?,stok_kw2_awal=stok_kw2_awal+? where id_karcis=? and bulan=? and tahun=?",
                         array($data_karcis[$i][0],$data_karcis[$i][1],$i+1,$data['bulan'],$tahun));
                 
             }else{
                 //inserting data laporan bulan
-                $this->db->query("insert into laporan_bulan(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?) ",
+                $this->db->query("insert into transaksi_porporasi(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?) ",
                 array($data['bulan'],$tahun,$i+1,$stokkarcis[$i][0],$stokkarcis[$i][1]));
             }
             
@@ -148,7 +148,7 @@ class Pengadaan_model extends CI_Model{
        
        $tahun = date('Y');
        
-       $q=$this->db->query("select id from laporan_bulan where bulan=? and tahun=?",array($bulan,$tahun));
+       $q=$this->db->query("select id from transaksi_porporasi where bulan=? and tahun=?",array($bulan,$tahun));
        if($q->num_rows()>0){
            return true;
        }else{
@@ -233,7 +233,7 @@ class Pengadaan_model extends CI_Model{
              
              //pengurangan laporan bulan
              for($i=0;$i<count($karcis);$i++){
-                $this->db->query("update laporan_bulan set stok_kw1_awal=stok_kw1_awal-?, stok_kw2_awal=stok_kw2_awal-? where bulan=".date('n')." and tahun=".date('Y')." and id_karcis=".($i+1),
+                $this->db->query("update transaksi_porporasi set stok_kw1_awal=stok_kw1_awal-?, stok_kw2_awal=stok_kw2_awal-? where bulan=".date('n')." and tahun=".date('Y')." and id_karcis=".($i+1),
                         array((int)$karcis[$i][0],(int)$karcis[$i][1]));
              }
              

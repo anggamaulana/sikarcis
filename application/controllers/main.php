@@ -76,7 +76,7 @@ class Main extends CI_Controller {
             $crud->add_action('LihatDetail', '', site_url('main/lihatpengadaangudang\/'), 'ui-icon-plus');
             $crud->set_language('indonesian');
             $crud->where('tahun', date('Y'));
-            $crud->columns('waktu','nama_penyetor','bulan','tahun','sss');
+            $crud->columns('waktu','nama_penyetor','bulan','tahun');
            
 
             $output = $crud->render();

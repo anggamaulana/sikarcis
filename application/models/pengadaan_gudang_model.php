@@ -112,7 +112,7 @@ class Pengadaan_gudang_model extends CI_Model{
             for($i=0;$i<8;$i++){
 
                 //ubah stok gudang
-                $this->db->query("update laporan_sirkulasi_gudang set stok_kw1_awal=stok_kw1_awal+?, stok_kw2_awal=stok_kw2_awal+? where id_karcis=? and bulan=? and tahun=?",
+                $this->db->query("update transaksi_sirkulasi_gudang set stok_kw1_awal=stok_kw1_awal+?, stok_kw2_awal=stok_kw2_awal+? where id_karcis=? and bulan=? and tahun=?",
                         array((int)$data_karcis[$i][0],(int)$data_karcis[$i][1],$i+1,(int)$bulan,(int)$tahun));
             }
              $this->db->query("update stok_gudang set bulan=0 where id_stok_gudang=? ",array($id_stok));
@@ -180,7 +180,7 @@ class Pengadaan_gudang_model extends CI_Model{
                     array($data_karcis[$i][0],$data_karcis[$i][1],$i+1));
             
             //ubah laporan gudang
-            $this->db->query("update laporan_sirkulasi_gudang set stok_kw1_awal=?,stok_kw2_awal=? where id_karcis=?",
+            $this->db->query("update transaksi_sirkulasi_gudang set stok_kw1_awal=?,stok_kw2_awal=? where id_karcis=?",
                    array($data_karcis[$i][0],$data_karcis[$i][1],$i+1));
         }
         
@@ -213,7 +213,7 @@ class Pengadaan_gudang_model extends CI_Model{
      }
      
      public function updateGantiPorporasi($bulan,$tahun){
-         $this->db->query("update laporan_bulan set stok_kw1_awal=0, stok_kw2_awal=0 where bulan=? and tahun=?",
+         $this->db->query("update transaksi_porporasi set stok_kw1_awal=0, stok_kw2_awal=0 where bulan=? and tahun=?",
                  array($bulan,$tahun));
      }
      

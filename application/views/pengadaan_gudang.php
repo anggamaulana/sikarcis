@@ -5,8 +5,8 @@
 <table width="200" border="1" bordercolor="#000000">
   <tr>
     <td width="50"><div align="center"><strong>Jenis Karcis </strong></div></td>
-    <td width="33"><div align="center"><strong>KW I </strong></div></td>
-    <td width="31"><strong>KW II </strong></td>
+    <td width="33"><div align="center"><strong>KW I (Kode Wilayah II) </strong></div></td>
+    <td width="31"><strong>KW II (Kode Wilayah II)  </strong></td>
    
   </tr>
   <tr>

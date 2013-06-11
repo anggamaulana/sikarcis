@@ -36,7 +36,7 @@ class Pengeluaran_model extends CI_Model{
        $bulan = date('n');
        $tahun = date('Y');
        
-       $q=$this->db->query("select id from laporan_bulan where bulan=? and tahun=?",array($bulan,$tahun));
+       $q=$this->db->query("select id from transaksi_porporasi where bulan=? and tahun=?",array($bulan,$tahun));
        if($q->num_rows()>0){
            return true;
        }else{
@@ -48,7 +48,7 @@ class Pengeluaran_model extends CI_Model{
        $bulan = date('n');
        $tahun = date('Y');
        
-       $q=$this->db->query("select id from laporan_sirkulasi_gudang where bulan=? and tahun=?",array($bulan,$tahun));
+       $q=$this->db->query("select id from transaksi_sirkulasi_gudang where bulan=? and tahun=?",array($bulan,$tahun));
        if($q->num_rows()>0){
            return true;
        }else{
@@ -63,7 +63,7 @@ class Pengeluaran_model extends CI_Model{
        $tahun = date('Y');
        
        foreach($hasil as $hs){
-           $this->db->query("insert into laporan_sirkulasi_gudang(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?)",
+           $this->db->query("insert into transaksi_sirkulasi_gudang(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?)",
                    array($bulan,$tahun,$hs->id_karcis,$hs->stok_kw1_gudang,$hs->stok_kw2_gudang));
        }
    }
@@ -75,7 +75,7 @@ class Pengeluaran_model extends CI_Model{
        $tahun = date('Y');
        
        foreach($hasil as $hs){
-           $this->db->query("insert into laporan_bulan(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?)",
+           $this->db->query("insert into transaksi_porporasi(bulan,tahun,id_karcis,stok_kw1_awal,stok_kw2_awal) values(?,?,?,?,?)",
                    array($bulan,$tahun,$hs->id_karcis,$hs->stok_kw1,$hs->stok_kw2));
        }
    }
