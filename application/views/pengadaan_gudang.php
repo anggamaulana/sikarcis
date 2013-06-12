@@ -1,4 +1,4 @@
-<h3>Pengadaan Gudang atau Pencetakan Bulan <?php echo $this->karcis->bulan_id(date('n'));?> Tahun <?php echo date('Y');?></h3>
+<h3>Pengadaan Karcis Gudang atau Pencetakan Bulan <?php echo $this->karcis->bulan_id(date('n'));?> Tahun <?php echo date('Y');?></h3>
 <br>
 <div style="float:left">
     <form action="" name="pengadaan_gudang" method="POST" >

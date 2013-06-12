@@ -36,7 +36,7 @@ Released   : 20130406
 				<li <?php if($menu==2) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengeluarankarcis');?>">Pengeluaran Karcis</a></li>
 				
 				<li <?php if($menu==4) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/jeniskarcis');?>">Stok Karcis</a></li>
-                                <li <?php if($menu==6) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengadaangudang');?>">Pengadaan Gudang</a></li>
+                                <li <?php if($menu==6) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/pengadaangudang');?>">Pengadaan Karcis Gudang</a></li>
 				<li <?php if($menu==5) echo 'class="current_page_item"'; ?>><a href="<?php echo site_url('main/laporan');?>">Laporan</a></li>
                                 <?php
                                 if($this->session->userdata('islogin')==true){

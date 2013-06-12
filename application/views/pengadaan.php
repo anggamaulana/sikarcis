@@ -1,6 +1,6 @@
 <div style="float:left">
 <form action="<?php echo site_url('main/simpanpengadaan') ;?>" name="pengadaan_karcis" method="POST" >
-<p class="style1"><h3>PENGADAAN BARANG / KARCIS PORPORASI</h3> </p>
+<p class="style1"><h3>PENGADAAN KARCIS PORPORASI</h3> </p>
 <table width="200" border="1" bordercolor="#000000">
   <tr>
     <td width="50"><div align="center"><strong>Jenis Karcis </strong></div></td>
